@@ -1,0 +1,61 @@
+<div *ngIf="task">
+    <div *ngIf="task.id" id="delete-button">
+        <button mat-icon-button 
+        (click)="delete()"
+        style="float: right;">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>  
+
+    <form class="example-form">
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Task</mat-label>
+                <input matInput name="name" [(ngModel)]="task.name" placeholder="task">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Tag</mat-label>
+                <mat-select name="tags" [(ngModel)]="task.tags" multiple>
+                  <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{ tag.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>        
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Due Date</mat-label>
+                <input matInput [matDatepicker]="picker" name="due_date" [(ngModel)]="task.due_date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <label>Frequency: </label>
+            <mat-radio-group name="frequency" [(ngModel)]="task.frequency">
+              <mat-radio-button value="o">Once</mat-radio-button>
+              <mat-radio-button value="d">Daily</mat-radio-button>
+              <mat-radio-button value="w">Weekly</mat-radio-button>
+              <mat-radio-button value="m">Monthly</mat-radio-button>
+              <mat-radio-button value="a">Annualy</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Notes</mat-label>
+                <textarea matInput 
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        name="notes" 
+                        [(ngModel)]="task.notes" 
+                        placeholder="notes">
+                </textarea>
+            </mat-form-field>
+        </div>
+        <div style="float: right;">
+            <button mat-raised-button color="primary" (click)="save()">Save</button>
+        </div>      
+    </form>
+
+</div>
+

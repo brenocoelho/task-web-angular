@@ -1,0 +1,10 @@
+
+<div class="tag-list-item">
+    <mat-checkbox (change)="selectTag($event.checked)">
+    </mat-checkbox>
+    <span class="tag tag-list-item-name" 
+        (click)="openDialog()"
+        style="background-color:{{ '#' + tag.color }};">
+        {{tag.name}}
+    </span>
+</div>

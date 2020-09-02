@@ -1,0 +1,23 @@
+<mat-card>
+  <div class="tags-list">
+    <ng-container *ngFor="let tag of tags">
+      <span *ngIf="hasTag(tag)"
+            class="tag"  
+            style="background-color:{{ '#' + tag.color }};">
+        {{tag.name }}
+      </span>
+    </ng-container>
+  </div>
+  <div class="clear"></div> 
+  <div>
+    <mat-icon (click)="done()" class="tag-list-item-check">radio_button_unchecked</mat-icon>
+    <span class="task-name">
+      {{task.name}}
+    </span>
+    <mat-icon aria-hidden="false" *ngIf="task.frequency != 'o'">autorenew</mat-icon>
+    <mat-icon aria-hidden="false" *ngIf="task.notes">notes</mat-icon>  
+  </div>  
+  <div>
+    {{task.due_date | date: 'dd/MM/yyyy'}}
+  </div>
+</mat-card>

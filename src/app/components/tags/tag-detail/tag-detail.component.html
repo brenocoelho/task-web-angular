@@ -1,0 +1,85 @@
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="tag.name">
+  </mat-form-field>
+  <button mat-icon-button 
+          *ngIf="tag.id"
+          (click)="delete()"
+          style="float: right;">
+      <mat-icon>delete</mat-icon>
+  </button>
+  <div>
+    <div (click)="setColor('42a5f5')" class="box tag-42a5f5">
+      <mat-icon *ngIf="tag.color == '42a5f5'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('1565c0')" class="box tag-1565c0">
+      <mat-icon *ngIf="tag.color == '1565c0'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('303f9f')" class="box tag-303f9f">
+      <mat-icon *ngIf="tag.color == '303f9f'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('512da8')" class="box tag-512da8">
+      <mat-icon *ngIf="tag.color == '512da8'"
+                class="white-icon">check</mat-icon>
+    </div>    
+    <div (click)="setColor('8bc34a')" class="box tag-8bc34a">
+      <mat-icon *ngIf="tag.color == '8bc34a'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('43a047')" class="box tag-43a047">
+      <mat-icon *ngIf="tag.color == '43a047'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('00796b')" class="box tag-00796b">
+      <mat-icon *ngIf="tag.color == '00796b'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('ffc107')" class="box tag-ffc107">
+      <mat-icon *ngIf="tag.color == 'ffc107'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('f57f17')" class="box tag-f57f17">
+      <mat-icon *ngIf="tag.color == 'f57f17'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('ec7063')" class="box tag-ec7063">
+      <mat-icon *ngIf="tag.color == 'ec7063'"
+                class="white-icon">check</mat-icon>
+    </div>  
+    <div (click)="setColor('e91e63')" class="box tag-e91e63">
+      <mat-icon *ngIf="tag.color == 'e91e63'"
+                class="white-icon">check</mat-icon>
+    </div>
+    <div (click)="setColor('c0392b')" class="box tag-c0392b">
+    <mat-icon *ngIf="tag.color == 'c0392b'"
+              class="white-icon">check</mat-icon>
+  </div>
+  <div (click)="setColor('7b241c')" class="box tag-7b241c">
+    <mat-icon *ngIf="tag.color == '7b241c'"
+              class="white-icon">check</mat-icon>
+  </div>
+  <div (click)="setColor('707b7c')" class="box tag-707b7c">
+    <mat-icon *ngIf="tag.color == '707b7c'"
+              class="white-icon">check</mat-icon>
+  </div>
+  <div (click)="setColor('455a64')" class="box tag-455a64">
+    <mat-icon *ngIf="tag.color == '455a64'"
+              class="white-icon">check</mat-icon>
+  </div>
+  <div (click)="setColor('000000')" class="box tag-000000">
+    <mat-icon *ngIf="tag.color == '000000'"
+              class="white-icon">check</mat-icon>
+  </div>
+
+</div>
+
+<div class="clear"></div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>

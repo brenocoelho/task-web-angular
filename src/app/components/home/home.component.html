@@ -1,0 +1,23 @@
+<div fxLayout='column'>
+    <div fxFlex="5vh">
+      <button mat-icon-button 
+              [matMenuTriggerFor]="menu"
+              style="float: right;">
+          <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Close</button>
+      </mat-menu>
+      <h2>tasks</h2>
+    </div>
+    <div fxFlex="95vh">
+      <div fxLayout='row' fxLayoutGap="7px">
+        <div fxFlex="15%">
+            <app-tag-list></app-tag-list>
+         </div>
+        <div fxFlex="85%">
+            <app-task-list></app-task-list>
+        </div>
+      </div>
+    </div>
+  </div>

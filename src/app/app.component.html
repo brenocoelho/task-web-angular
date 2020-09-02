@@ -1,0 +1,11 @@
+<!-- <mat-toolbar color="primary">
+  <h1>{{title}}</h1>
+  <button mat-button *ngIf="this.authService.isLoggedIn" routerLink="/tasks">Tasks</button>
+  <button mat-button *ngIf="this.authService.isLoggedIn" routerLink="/tags">Tags</button>
+  <button mat-button *ngIf="this.authService.isLoggedIn" routerLink="/user">User</button>
+  <button mat-button *ngIf="!this.authService.isLoggedIn" routerLink="/login">Login</button>
+  <button mat-button *ngIf="!this.authService.isLoggedIn" routerLink="/signup">Signup</button>
+  <button mat-button (click)="logout()" *ngIf="this.authService.isLoggedIn">Logout</button>
+</mat-toolbar> -->
+
+<router-outlet></router-outlet>

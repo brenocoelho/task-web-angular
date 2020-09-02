@@ -1,0 +1,34 @@
+mat-card {
+  margin: 4px;
+}
+
+.tag-list-item-check {
+  cursor: pointer;
+}
+
+// .task-name {
+//   padding-top: 1px;
+//   padding-right: 3px;
+//   padding-bottom: 10px;
+//   padding-left: 3px;  
+// }
+
+.tags-list {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.tag {
+    color:white;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    margin-left: 2px;
+    padding-top: 1px;
+    padding-right: 3px;
+    padding-bottom: 1px;
+    padding-left: 3px;    
+  }
