@@ -19,19 +19,23 @@ export function selectTaskId(a: Task): string {
 }
  
 export function sortByName(a: Task, b: Task): number {
-  if (a.due_date == b.due_date) {
-    return 0
-  }
-  else if (!a.due_date) {
-    return 1;
-  }
-  else if (!b.due_date) {
+  
+  var a_priority: boolean = a.tags.includes("priority");
+  var b_priority: boolean = b.tags.includes("priority");
+
+  if (a_priority && !b_priority) {
     return -1;
-  }
-  else if (a.due_date > b.due_date) {
+  } else if (!a_priority && b_priority) {
     return 1;
-  }
-  else { // ( a.due_date < b.due_date)
+  } else if (a.due_date == b.due_date) {
+    return 0
+  } else if (!a.due_date) {
+    return 1;
+  } else if (!b.due_date) {
+    return -1;
+  } else if (a.due_date > b.due_date) {
+    return 1;
+  } else { // ( a.due_date < b.due_date)
     return -1;
   }
 }
