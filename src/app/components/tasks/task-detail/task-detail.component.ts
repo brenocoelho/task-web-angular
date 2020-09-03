@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AppFacade } from '../../../state/app.facade';
+// import { AppFacade } from '../../../state/app.facade';
 
 import { TaskFacade } from '../../../store/task/task.facade'
 import { TagFacade } from '../../../store/tag/tag.facade'

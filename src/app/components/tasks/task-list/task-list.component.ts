@@ -8,7 +8,7 @@ import { Tag } from '../../../models/tag';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import { AppFacade } from '../../../state/app.facade'
+// import { AppFacade } from '../../../state/app.facade'
 import { TaskFacade } from '../../../store/task/task.facade'
 import { TagFacade } from '../../../store/tag/tag.facade'
 
@@ -19,7 +19,7 @@ import { TagFacade } from '../../../store/tag/tag.facade'
 })
 export class TaskListComponent implements OnInit {
   tags$ = this.tagFacade.tags$;
-  selectedTags$ = this.appFacade.selectedTags$;
+  // selectedTags$ = this.appFacade.selectedTags$;
 
   tasks$ = this.taskFacade.tasks$;
 
@@ -33,7 +33,7 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private appFacade: AppFacade,
+    // private appFacade: AppFacade,
     private taskFacade: TaskFacade,
     private tagFacade: TagFacade,
     ) { }

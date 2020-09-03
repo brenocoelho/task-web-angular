@@ -22,10 +22,16 @@ export function sortByName(a: Task, b: Task): number {
   if (a.due_date == b.due_date) {
     return 0
   }
-  else if (a.due_date == null || a.due_date > b.due_date) {
+  else if (!a.due_date) {
     return 1;
   }
-  else { // ( b.due_date == null || a.due_date < b.due_date)
+  else if (!b.due_date) {
+    return -1;
+  }
+  else if (a.due_date > b.due_date) {
+    return 1;
+  }
+  else { // ( a.due_date < b.due_date)
     return -1;
   }
 }
