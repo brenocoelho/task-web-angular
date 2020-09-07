@@ -52,7 +52,8 @@ import { TaskEffects } from './store/task/task.effects';
 import { TagEffects } from './store/tag/tag.effects';
 
 import { environment } from '../environments/environment';
-import { HomeComponent } from './components/home/home.component'; // Angular CLI environment
+import { HomeComponent } from './components/home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular CLI environment
 
 @NgModule({
   declarations: [
@@ -106,6 +107,8 @@ import { HomeComponent } from './components/home/home.component'; // Angular CLI
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+
+    NgbModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},  
