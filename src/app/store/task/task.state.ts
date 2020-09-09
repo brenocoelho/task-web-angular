@@ -18,7 +18,7 @@ export function selectTaskId(a: Task): string {
   return a.id;
 }
  
-export function sortByName(a: Task, b: Task): number {
+export function sortTasks(a: Task, b: Task): number {
   
   var a_priority: boolean = a.tags.includes("priority");
   var b_priority: boolean = b.tags.includes("priority");
@@ -42,7 +42,7 @@ export function sortByName(a: Task, b: Task): number {
  
 export const adapter: EntityAdapter<Task> = createEntityAdapter<Task>({
   selectId: selectTaskId,
-  sortComparer: sortByName,
+  sortComparer: sortTasks,
 });
 
 export interface TaskPartialState {

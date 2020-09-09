@@ -5,6 +5,7 @@ import { Tag } from '../../../models/tag';
 import { TagService } from '../../../services/tag/tag.service';
 
 import { TagFacade } from '../../../store/tag/tag.facade'
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 
 export interface DialogData {
   tag: Tag;
@@ -18,6 +19,8 @@ export interface DialogData {
 export class TagDetailComponent implements OnInit {
 
   tag: Tag;
+  master: Tag;
+  tags$ = this.tagFacade.tags$;
 
   constructor(
     private tagFacade: TagFacade,
@@ -42,7 +45,23 @@ export class TagDetailComponent implements OnInit {
     this.tag.color = color;
   }
 
+  selectTag(tag: Tag): void {
+    this.master = tag;
+  }
+
+  setMasterTagNull(): void {
+    this.master = null;
+  }
+
   save(): void {
+    this.tag.path = [];
+    if (this.master) {
+      if (this.master.path && this.master.path.length > 0) {
+        this.tag.path = Object.assign([],this.master.path);
+      }
+      this.tag.path.push(this.master.id);
+    }
+
     if (this.tag.id) {
       this.tagFacade.updateTag(this.tag);
     } else {

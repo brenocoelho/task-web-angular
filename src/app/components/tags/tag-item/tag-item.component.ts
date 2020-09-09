@@ -14,6 +14,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class TagItemComponent implements OnInit {
 
   @Input() tag: Tag;
+  selected: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -24,8 +25,9 @@ export class TagItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectTag(selected: Boolean) {
-    if (selected) {
+  selectTag() {
+    this.selected = !this.selected;
+    if (this.selected) {
       this.taskFacade.selectTag(this.tag);
     } else {
       this.taskFacade.unselectTag(this.tag);
@@ -35,7 +37,7 @@ export class TagItemComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(TagDetailComponent, {
       width: '420px',
-      height: '250px',
+      height: '450px',
       data: {tag: {...this.tag}}
     });
 

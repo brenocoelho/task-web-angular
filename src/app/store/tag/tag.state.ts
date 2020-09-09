@@ -14,13 +14,27 @@ export function selectTagId(a: Tag): string {
   return a.id;
 }
  
-export function sortByName(a: Tag, b: Tag): number {
-  return a.name.localeCompare(b.name);
+export function sortTags(a: Tag, b: Tag): number {
+
+  if(a.path && a.path.includes(b.id)) {
+    return 1
+  } else if(b.path && b.path.includes(a.id)) {
+    return -1
+  } else {
+    var a_path = a.id;
+    if (a.path) { a_path =  a.path.join() + a.id; }
+  
+    var b_path = b.id;
+    if (b.path) { b_path =  b.path.join() + b.id; }
+  
+    return a_path.localeCompare(b_path);
+  }
 }
+
  
 export const adapter: EntityAdapter<Tag> = createEntityAdapter<Tag>({
   selectId: selectTagId,
-  sortComparer: sortByName,
+  sortComparer: sortTags,
 });
 
 export interface TagPartialState {

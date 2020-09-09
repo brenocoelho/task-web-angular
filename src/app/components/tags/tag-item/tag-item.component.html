@@ -1,7 +1,11 @@
 
 <div class="tag-list-item">
-    <mat-checkbox (change)="selectTag($event.checked)">
-    </mat-checkbox>
+    <span *ngIf="tag.path && tag.path.length > 0"> + </span>
+    <span *ngIf="tag.path && tag.path.length > 1"> + </span>
+    <span *ngIf="tag.path && tag.path.length > 2"> + </span>
+    <span *ngIf="tag.path && tag.path.length > 3"> + </span>
+
+    <input type="checkbox" (change)="selectTag()" [checked]="selected">
     <span class="tag tag-list-item-name" 
         (click)="openDialog()"
         style="background-color:{{ '#' + tag.color }};">

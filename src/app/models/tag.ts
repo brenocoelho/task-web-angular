@@ -4,4 +4,5 @@ export interface Tag {
     name: string;
     color: string;
     priority: number;
+    path: string[];
 }

@@ -15,12 +15,14 @@
             </mat-form-field>
         </div>
         <div>
-            <mat-form-field>
-                <mat-label>Tag</mat-label>
-                <mat-select name="tags" [(ngModel)]="task.tags" multiple>
-                  <mat-option *ngFor="let tag of tags$ | async" [value]="tag.id">{{ tag.name }}</mat-option>
-                </mat-select>
-            </mat-form-field>        
+            <div *ngFor="let tag of tags$ | async">
+                <!-- <span *ngFor='let in of tag.path.length ;let i = index'>+</span> -->
+                <span *ngIf="tag.path && tag.path.length > 0"> + </span>
+                <span *ngIf="tag.path && tag.path.length > 1"> + </span>
+                <span *ngIf="tag.path && tag.path.length > 2"> + </span>
+                <span *ngIf="tag.path && tag.path.length > 3"> + </span>
+                <input type="checkbox" (change)="selectTag(tag)" [checked]="task.tags.includes(tag.id)"> {{ tag.name }}
+            </div>
         </div>
         <div>
             <mat-form-field>

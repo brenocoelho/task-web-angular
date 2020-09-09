@@ -1,18 +1,12 @@
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Component, OnInit, Input } from '@angular/core';
-
-// import { AppFacade } from '../../../state/app.facade';
 
 import { TaskFacade } from '../../../store/task/task.facade'
 import { TagFacade } from '../../../store/tag/tag.facade'
 
 import { Task } from '../../../models/task';
 import { Tag } from '../../../models/tag';
-
-import { TaskService }  from '../../../services/task/task.service';
-import { TagService } from '../../../services/tag/tag.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -27,6 +21,7 @@ export class TaskDetailComponent implements OnInit {
   @Input() task: Task;
 
   tags$ = this.tagFacade.tags$;
+  tags: Tag[];
   
   constructor(
     // private messageService: MessageService,
@@ -34,11 +29,24 @@ export class TaskDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private taskFacade: TaskFacade,
     private tagFacade: TagFacade,
-  ) { 
-    // this.task$.subscribe((task) => this.task = task);
+  ) {
+    this.tags$.subscribe((tags) => this.tags = tags as Tag[]);
   }
 
   ngOnInit(): void { }
+
+  selectTag(tag: Tag) {
+    if (this.task.tags.includes(tag.id)) {
+      var hasTag: Tag[] = this.tags.filter(t => t.path && t.path.includes(tag.id));
+      hasTag.push(tag);
+      this.task.tags = this.task.tags.filter(id => !hasTag.some(t => t.id == id));
+    } else {
+      if (tag.path) {
+        this.task.tags = [...this.task.tags, ...tag.path.filter(i => this.task.tags.indexOf(i) < 0)];
+      }
+      this.task.tags = [...this.task.tags, tag.id];
+    }
+  }
 
   save(): void {
     if (this.task.id) {

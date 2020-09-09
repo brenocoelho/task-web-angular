@@ -43,7 +43,7 @@ export class TagListComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(TagDetailComponent, {
       width: '420px',
-      height: '250px',
+      height: '450px',
       data: {tag: null}
     });
 
