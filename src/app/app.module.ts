@@ -27,6 +27,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTreeModule} from '@angular/material/tree';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -96,6 +97,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular CLI environme
     MatDialogModule,
     MatBadgeModule,
     MatCheckboxModule,
+    MatTreeModule,
 
     FlexLayoutModule,
 
