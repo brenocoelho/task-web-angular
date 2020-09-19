@@ -9,7 +9,7 @@ export interface State extends EntityState<Task> {
   // additional entities state properties
   loading: boolean;
   selectedTags: Array<Tag>;
-  editTask: Task;
+  selectedTask: Task;
   filter: string;
 }
  
@@ -20,8 +20,8 @@ export function selectTaskId(a: Task): string {
  
 export function sortTasks(a: Task, b: Task): number {
   
-  var a_priority: boolean = a.tags.includes("priority");
-  var b_priority: boolean = b.tags.includes("priority");
+  var a_priority: boolean = (!!a.tags && a.tags.includes("priority"));
+  var b_priority: boolean = (!!b.tags && b.tags.includes("priority"));
 
   if (a_priority && !b_priority) {
     return -1;
@@ -53,6 +53,6 @@ export const initialState: State = adapter.getInitialState({
     // additional entity state properties
     loading: false,
     selectedTags: [],
-    editTask: null,
+    selectedTask: null,
     filter: 'OR',
 });

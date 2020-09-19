@@ -3,7 +3,6 @@ import { State, initialState, adapter } from './task.state';
 import { Update, EntityMap, Predicate } from '@ngrx/entity';
 import * as fromActions from './task.actions';
 
-import { Tag } from '../../models/tag'
 import { Task } from '../../models/task'
 
 const _reducer = createReducer(
@@ -34,6 +33,12 @@ const _reducer = createReducer(
     }),
     on(fromActions.setFilter, (state: State, { filter }) => {
       return { ...state, filter: filter };
+    }),
+    on(fromActions.selectTask, (state: State, { task }) => {
+      return { ...state, selectedTask: task };
+    }),
+    on(fromActions.cleanTask, (state) => {
+      return {...state, selectedTask: null};
     }),
 );
 

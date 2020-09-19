@@ -14,5 +14,5 @@ export const updateTagSuccess = createAction('[Tag API] Update Tag Success', pro
 export const deleteTag = createAction('[Tag Component] Delete Tag', props<{ tag: Tag }>());
 export const deleteTagSuccess = createAction('[Tag API] Delete Tag Success', props<{ tag: Tag }>());
 
-export const editTag = createAction('[Tag Component] Edit Tag', props<{ tag: Tag }>());
+export const selectTag = createAction('[Tag Component] select Tag', props<{ tag: Tag }>());
 export const cleanTag = createAction('[Tag Component] Clean Tag');

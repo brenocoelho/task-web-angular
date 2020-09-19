@@ -6,7 +6,7 @@ export const TAG_FEATURE_KEY = "tags";
 
 export interface State extends EntityState<Tag> {
   // additional entities state properties
-  editTag: Tag;
+  selectedTag: Tag;
 }
  
 export function selectTagId(a: Tag): string {
@@ -16,9 +16,25 @@ export function selectTagId(a: Tag): string {
  
 export function sortTags(a: Tag, b: Tag): number {
 
-  if(a.path && a.path.includes(b.id)) {
+  if(a.id == "priority") {
+    return -1
+  } else if(b.id == "priority") {
     return 1
-  } else if(b.path && b.path.includes(a.id)) {
+  } else if(!!a.path && a.path[0] == "priority") {
+    return -1
+  } else if(!!b.path && b.path[0] == "priority") {
+    return 1
+  } else if(a.id == "payment") {
+    return -1
+  } else if(b.id == "payment") {
+    return 1
+  } else if(!!a.path && a.path[0] == "payment") {
+    return -1
+  } else if(!!b.path && b.path[0] == "payment") {
+    return 1
+  } else if(!!a.path && a.path.includes(b.id)) {
+    return 1
+  } else if(!!b.path && b.path.includes(a.id)) {
     return -1
   } else {
     var a_path = a.id;
@@ -43,5 +59,5 @@ export interface TagPartialState {
 
 export const initialState: State = adapter.getInitialState({
     // additional entity state properties
-    editTag: null,
+    selectedTag: null,
 });

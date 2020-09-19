@@ -16,6 +16,11 @@ export const selectedFilter = createSelector(
   (state: State) => state.filter
 );
 
+export const selectedTask = createSelector(
+  getTaskState,
+  (state: State) => state.selectedTask
+);
+
 // get the selectors
 const {
   selectIds,

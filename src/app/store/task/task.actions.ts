@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { Update, EntityMap, Predicate } from '@ngrx/entity';
  
 import { Task } from '../../models/task'
 import { Tag } from '../../models/tag'
@@ -19,6 +18,8 @@ export const deleteTaskSuccess = createAction('[Task API] Delete Task Success', 
 export const setFilter = createAction('[Task Component] Set Filter', props<{ filter: string }>());
 // export const updateTaskSuccess = createAction('[Task API] Update Task Success', props<{ task: Task }>());
 
-
 export const selectTag = createAction('[Tag Component] Select Tag', props<{ tag: Tag }>());
 export const unselectTag = createAction('[Tag Component] Unselect Tag', props<{ tag: Tag }>());
+
+export const selectTask = createAction('[Task Component] Select Task', props<{ task: Task }>());
+export const cleanTask = createAction('[Task Component] Clean Task');

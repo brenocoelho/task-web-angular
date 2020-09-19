@@ -27,7 +27,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatTreeModule} from '@angular/material/tree';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +34,6 @@ import { TaskListComponent } from './components/tasks/task-list/task-list.compon
 import { TaskDetailComponent } from './components/tasks/task-detail/task-detail.component';
 import { TagDetailComponent } from './components/tags/tag-detail/tag-detail.component';
 import { TagListComponent } from './components/tags/tag-list/tag-list.component';
-import { TagItemComponent } from './components/tags/tag-item/tag-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
@@ -54,7 +52,6 @@ import { TagEffects } from './store/tag/tag.effects';
 
 import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular CLI environment
 
 @NgModule({
   declarations: [
@@ -63,7 +60,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular CLI environme
     TaskDetailComponent,
     TagDetailComponent,
     TagListComponent,
-    TagItemComponent,
     SignupComponent,
     LoginComponent,
     UserComponent,
@@ -97,7 +93,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular CLI environme
     MatDialogModule,
     MatBadgeModule,
     MatCheckboxModule,
-    MatTreeModule,
 
     FlexLayoutModule,
 
@@ -109,8 +104,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Angular CLI environme
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-
-    NgbModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},  

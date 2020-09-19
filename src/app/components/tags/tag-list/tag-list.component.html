@@ -1,7 +1,7 @@
 <div>
     <button mat-icon-button
             matTooltip="Create Tag"
-            (click)="openDialog()"
+            (click)="creatTag()"
             style="float: right;">
         <mat-icon>add</mat-icon>
     </button>
@@ -13,36 +13,29 @@
     </mat-select>
 </div>
 <div *ngFor="let tag of tags$ | async" class="tag-list-item">
-    <app-tag-item [tag]="tag" ></app-tag-item>
-</div>
+    <div class="tag-list-item" *ngIf="showTag(tag)">
 
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
-      <button mat-icon-button disabled></button>
-      <mat-checkbox class="checklist-leaf-node"
-                    [checked]="checklistSelection.isSelected(node)"
-                    (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
-    </mat-tree-node>
-  
-    <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
-      <button mat-icon-button disabled></button>
-      <mat-form-field>
-        <mat-label>New item...</mat-label>
-        <input matInput #itemValue placeholder="Ex. Lettuce">
-      </mat-form-field>
-      <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
-    </mat-tree-node>
-  
-    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-      <button mat-icon-button matTreeNodeToggle
-              [attr.aria-label]="'Toggle ' + node.item">
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      <mat-checkbox [checked]="descendantsAllSelected(node)"
-                    [indeterminate]="descendantsPartiallySelected(node)"
-                    (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
-      <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
-    </mat-tree-node>
-  </mat-tree>
+        <span *ngFor="let p of tag.path">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+        <button mat-icon-button class="small" *ngIf="showExpandIcon(tag) == 'expand'" (click)="expandTag(tag)">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button mat-icon-button class="small"  *ngIf="showExpandIcon(tag) == 'collapse'" (click)="collapseTag(tag)">
+            <mat-icon>expand_more</mat-icon>
+        </button>
+        <button mat-icon-button class="small"  disabled *ngIf="showExpandIcon(tag) == 'no'">
+            <mat-icon></mat-icon>
+        </button>
+
+        <input type="checkbox" (change)="selectTag(tag)" [checked]="this.selectedTags.includes(tag)">
+        
+        <mat-icon aria-hidden="false" *ngIf="tag.id == 'priority'">priority_high</mat-icon>
+        <mat-icon aria-hidden="false" *ngIf="tag.id == 'payment'">payments</mat-icon>
+        <span class="tag tag-list-item-name" 
+            (click)="editTag(tag)"
+            style="background-color:{{ '#' + tag.color }};">
+            {{tag.name}}
+        </span>
+    </div>
+
+</div>

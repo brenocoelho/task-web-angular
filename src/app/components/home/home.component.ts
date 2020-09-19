@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth.service';
-import { TaskFacade } from '../../store/task/task.facade'
-import { TagFacade } from '../../store/tag/tag.facade'
+import { TaskFacade } from '../../store/task.facade'
+import { TagFacade } from '../../store/tag.facade'
 
 @Component({
   selector: 'app-home',

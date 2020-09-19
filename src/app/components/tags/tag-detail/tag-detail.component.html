@@ -1,28 +1,52 @@
 <div mat-dialog-content>
+
+  <div class="tags-list" *ngIf="!isTagTreeVisible">
+      <ng-container *ngFor="let tag of tags">
+          <span *ngIf="hasTag(tag)"
+                  class="tag tag-simple-list-item"  
+                  style="background-color:{{ '#' + tag.color }};">
+              {{tag.name }}
+          </span>
+      </ng-container>
+  </div> 
+
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput [(ngModel)]="tag.name">
   </mat-form-field>
+  
   <button mat-icon-button 
           *ngIf="tag.id"
           (click)="delete()"
           style="float: right;">
       <mat-icon>delete</mat-icon>
   </button>
-  <div>
-    <div>
-      <input type="checkbox" (change)="setMasterTagNull()" [checked]="!master">
+
+  <div *ngIf="isTagTreeVisible">
+      <div *ngFor="let t of tags$ | async" class="tag-list-item">
+        <div class="tag-list-item" *ngIf="showTag(t)">
+    
+            <span *ngFor="let p of t.path">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    
+            <button mat-icon-button class="small" *ngIf="showExpandIcon(t) == 'expand'" (click)="expandTag(t)">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+            <button mat-icon-button class="small"  *ngIf="showExpandIcon(t) == 'collapse'" (click)="collapseTag(t)">
+                <mat-icon>expand_more</mat-icon>
+            </button>
+            <button mat-icon-button class="small"  disabled *ngIf="showExpandIcon(t) == 'no'">
+                <mat-icon></mat-icon>
+            </button>
+    
+            <input type="checkbox" (change)="selectTag(t)" [checked]="!!tag && ( tag.id == t.id || (!!tag.path && tag.path.includes(t.id)) )">
+            <span class="tag tag-list-item-name"
+                style="background-color:{{ '#' + t.color }};">
+                {{t.name}}
+            </span>
+        </div>
+    
     </div>
-      <div *ngFor="let tag of tags$ | async">
-          <!-- <span *ngFor='let in of tag.path.length ;let i = index'>+</span> -->
-          <span *ngIf="tag.path && tag.path.length > 0"> + </span>
-          <span *ngIf="tag.path && tag.path.length > 1"> + </span>
-          <span *ngIf="tag.path && tag.path.length > 2"> + </span>
-          <span *ngIf="tag.path && tag.path.length > 3"> + </span>
-          <!-- <input type="checkbox" (change)="selectTag(tag)" [checked]="task.tags.includes(tag.id)"> -->
-          <input type="checkbox" (change)="selectTag(tag)" [checked]="master && ( master.id == tag.id || (master.path && master.path.includes(tag.id)) )">
-          {{ tag.name }}
-      </div>
+
   </div>  
   <div>
     <div (click)="setColor('42a5f5')" class="box tag-42a5f5">

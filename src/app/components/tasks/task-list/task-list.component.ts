@@ -9,8 +9,8 @@ import { Tag } from '../../../models/tag';
 import { MatDialog } from '@angular/material/dialog';
 
 // import { AppFacade } from '../../../state/app.facade'
-import { TaskFacade } from '../../../store/task/task.facade'
-import { TagFacade } from '../../../store/tag/tag.facade'
+import { TaskFacade } from '../../../store/task.facade'
+import { TagFacade } from '../../../store/tag.facade'
 
 @Component({
   selector: 'app-task-list',
@@ -29,11 +29,8 @@ export class TaskListComponent implements OnInit {
   
   selectedTags: Tag[] = [];
 
-  selectedTask: Task;
-
   constructor(
     public dialog: MatDialog,
-    // private appFacade: AppFacade,
     private taskFacade: TaskFacade,
     private tagFacade: TagFacade,
     ) { }
@@ -41,7 +38,7 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void { }
 
   onSelect(task: Task): void {
-    this.selectedTask = {...task};
+    this.taskFacade.selectTask({...task});
   }
 
   createTask(): void {
@@ -54,7 +51,7 @@ export class TaskListComponent implements OnInit {
       tags: [],
       subtasks: []
     };
-    this.selectedTask = task;
+    this.taskFacade.selectTask(task);
   }
 
 }

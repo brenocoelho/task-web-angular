@@ -29,7 +29,7 @@ export const selectTagIds = createSelector(
     selectTotal
   );
 
-export const selectEditTag = createSelector(
+export const selectedTag = createSelector(
   getTagState,
-  (state: State) => state.editTag
+  (state: State) => state.selectedTag
 ); 

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
-import { State } from './tag.state';
-import * as fromSelectors from './tag.selectors';
-import * as fromActions from './tag.actions';
+import { State } from './tag/tag.state';
+import * as fromSelectors from './tag/tag.selectors';
+import * as fromActions from './tag/tag.actions';
 
-import { Tag } from '../../models/tag';
+import { Tag } from '../models/tag';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class TagFacade {
 
   tags$ = this.store.pipe(select(fromSelectors.selectAllTags));
 
-  editTag$ = this.store.pipe(select(fromSelectors.selectEditTag));
+  selectedTag$ = this.store.pipe(select(fromSelectors.selectedTag));
 
   loadTags() {
     this.store.dispatch(fromActions.loadTags());
@@ -34,8 +34,8 @@ export class TagFacade {
     this.store.dispatch(fromActions.deleteTag({tag}));
   }
 
-  editTag(tag: Tag) {
-    this.store.dispatch(fromActions.editTag({tag}));
+  selectTag(tag: Tag) {
+    this.store.dispatch(fromActions.selectTag({tag}));
   }
 
   cleanTag() {

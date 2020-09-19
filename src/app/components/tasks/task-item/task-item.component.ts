@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Task } from 'src/app/models/task';
 import { Tag } from 'src/app/models/tag';
 
-import { TaskFacade } from './../../../store/task/task.facade';
+import { TaskFacade } from './../../../store/task.facade';
 
 @Component({
   selector: 'app-task-item',
@@ -28,7 +28,7 @@ export class TaskItemComponent implements OnInit {
   }
 
   hasTag(tag: Tag): boolean {
-    return this.task.tags.includes(tag.id);
+    return !!this.task && !!this.task.tags && this.task.tags.includes(tag.id);
   }
 
   done():void {
@@ -73,7 +73,7 @@ export class TaskItemComponent implements OnInit {
           day = '0' + day;
   
       return [year, month, day].join('-');
-    }    
+    }
 
   }
 }

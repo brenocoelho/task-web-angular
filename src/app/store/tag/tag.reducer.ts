@@ -25,11 +25,11 @@ const _reducer = createReducer(
     on(fromActions.deleteTagSuccess, (state, { tag }) => {
       return adapter.removeOne(tag.id, state);
     }),
-    on(fromActions.editTag, (state, { tag }) => {
-        return {...state, editTag: tag};
+    on(fromActions.selectTag, (state, { tag }) => {
+        return {...state, selectedTag: tag};
     }),
     on(fromActions.cleanTag, (state) => {
-      return {...state, editTag: null};
+      return {...state, selectedTag: null};
     }),
 );
 

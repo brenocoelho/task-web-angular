@@ -1,4 +1,4 @@
-<div *ngIf="task">
+<div *ngIf="!!task">
     <div *ngIf="task.id" id="delete-button">
         <button mat-icon-button 
         (click)="delete()"
@@ -7,32 +7,55 @@
         </button>
     </div>  
 
-    <form class="example-form">
+    <form>
+        <div class="tags-list" (click)="showTagTree()" *ngIf="!isTagTreeVisible">
+            <ng-container *ngFor="let tag of tags">
+                <span *ngIf="hasTag(tag)"
+                        class="tag tag-simple-list-item"  
+                        style="background-color:{{ '#' + tag.color }};">
+                    {{tag.name }}
+                </span>
+            </ng-container>
+        </div> 
         <div>
             <mat-form-field class="full-width">
                 <mat-label>Task</mat-label>
                 <input matInput name="name" [(ngModel)]="task.name" placeholder="task">
             </mat-form-field>
-        </div>
-        <div>
-            <div *ngFor="let tag of tags$ | async">
-                <!-- <span *ngFor='let in of tag.path.length ;let i = index'>+</span> -->
-                <span *ngIf="tag.path && tag.path.length > 0"> + </span>
-                <span *ngIf="tag.path && tag.path.length > 1"> + </span>
-                <span *ngIf="tag.path && tag.path.length > 2"> + </span>
-                <span *ngIf="tag.path && tag.path.length > 3"> + </span>
-                <input type="checkbox" (change)="selectTag(tag)" [checked]="task.tags.includes(tag.id)"> {{ tag.name }}
+        </div> 
+        <div *ngIf="isTagTreeVisible">
+            <div *ngFor="let tag of tags$ | async" class="tag-list-item">
+                <div class="tag-list-item" *ngIf="showTag(tag)">
+            
+                    <span *ngFor="let p of tag.path">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            
+                    <button mat-icon-button class="small" *ngIf="showExpandIcon(tag) == 'expand'" (click)="expandTag(tag)">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                    <button mat-icon-button class="small"  *ngIf="showExpandIcon(tag) == 'collapse'" (click)="collapseTag(tag)">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                    <button mat-icon-button class="small"  disabled *ngIf="showExpandIcon(tag) == 'no'">
+                        <mat-icon></mat-icon>
+                    </button>
+            
+                    <input type="checkbox" (change)="selectTag(tag)" [checked]="isTagChecked(tag)">
+                    <span class="tag tag-list-item-name"
+                        style="background-color:{{ '#' + tag.color }};">
+                        {{tag.name}}
+                    </span>
+                </div>           
             </div>
         </div>
-        <div>
+        <div *ngIf="isDateVisible">
             <mat-form-field>
-                <mat-label>Due Date</mat-label>
+                <mat-label>Date</mat-label>
                 <input matInput [matDatepicker]="picker" name="due_date" [(ngModel)]="task.due_date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </div>
-        <div>
+        <div *ngIf="isDateVisible">
             <label>Frequency: </label>
             <mat-radio-group name="frequency" [(ngModel)]="task.frequency">
               <mat-radio-button value="o">Once</mat-radio-button>
@@ -42,7 +65,7 @@
               <mat-radio-button value="a">Annualy</mat-radio-button>
             </mat-radio-group>
         </div>
-        <div>
+        <div *ngIf="isNotesVisible">
             <mat-form-field class="full-width">
                 <mat-label>Notes</mat-label>
                 <textarea matInput 
@@ -54,6 +77,15 @@
                 </textarea>
             </mat-form-field>
         </div>
+        <span *ngIf="!isTagTreeVisible && (!task.tags || (!!task.tags && task.tags.length == 0)) ">
+            <button mat-stroked-button (click)="showTagTree()">Add Tag</button>
+        </span> 
+        <span *ngIf="!isDateVisible">
+            <button mat-stroked-button (click)="showDate()">Add Date</button>
+        </span> 
+        <span *ngIf="!isNotesVisible">
+            <button mat-stroked-button (click)="showNotes()">Add Notes</button>
+        </span>  
         <div style="float: right;">
             <button mat-raised-button color="primary" (click)="save()">Save</button>
         </div>      
